@@ -1,0 +1,68 @@
+<html>
+
+<head>
+  <title>
+    Function.prototype.call, Function.prototype.apply, Function.prototype.bind
+  </title>
+</head>
+
+<body>
+  <a href="/ejercicios/">Go back</a>
+  <p><em>Abre la consola</em></p>
+
+  <ul>
+    <li><button class="call-to-action">Aprender</button></li>
+    <li><button class="call-to-action">Aprender Más</button></li>
+    <li><button class="call-to-action">¡Nunca parar de Aprender!</button></li>
+  </ul>
+
+  <script>// 'call' se utiliza para definir el `this` que usará la función
+function saludar() {
+  console.log(`Hola. Soy ${this.name} ${this.apellido}`);
+}
+
+const dennis = {
+  name: 'Dennis',
+  apellido: 'Guzman'
+}; //con el 'call'  le decimos que el 'this' hará referencia al objeto 'dennis'
+
+saludar.call(dennis);
+
+function caminar(distancia, direccion) {
+  console.log(`${this.name} camina ${distancia} mts en direccón ${direccion}`);
+}
+
+caminar.call(dennis, 400, 'norte'); //'apply' es similar a 'call' pero maneja los argumentos como un arreglo
+
+caminar.apply(dennis, [800, 'noreste']); //o
+
+const valores = [600, 'sur'];
+caminar.apply(dennis, valores); //Establecer 'this' en una nueva función usando 'bind'
+
+const andreita = {
+  name: 'Andrea',
+  apellido: 'Gonzales'
+};
+const andreitaSaluda = saludar.bind(andreita);
+andreitaSaluda(); //también podemos pasar argumentos
+
+const andreitaCamina = caminar.bind(andreita);
+andreitaCamina(10000, 'sureste'); //o
+
+const andreitaCamina2 = caminar.bind(andreita, 200, 'este');
+andreitaCamina2(); //o
+
+const andreitaCamina3 = caminar.bind(andreita, 2000);
+andreitaCamina3('noroeste'); //Cuándo es útil usar uno de estos métodos
+//todos los botones tienen un método 'call-to-action'
+
+const buttons = document.getElementsByClassName('call-to-action'); // buttons.forEach(button => {
+//   button.onclick = () => alert('Nunca pares de aprender!');
+// });
+
+Array.prototype.forEach.call(buttons, button => {
+  button.onclick = () => alert('Nunca pares de aprender!');
+});</script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype</title>
+</head>
+
+<body>
+    <a href="/ejercicios/">Go back</a>
+    <p><em>Abre la consola</em></p>
+
+    <script>function Hero(name) {
+  //Esta línea de código ocurre automáticamente al usar 'new'
+  //const hero = Object.create(Hero.prototype)
+  //Pero en lugar de guardarse en 'hero'
+  //Se va a guardar en 'this'
+  //La siguiente línea cambiaría de esto
+  //hero.name = name;
+  //a esto
+  this.name = name; //Ya no sería 'return hero'
+  //ahora debería ser 'return this'
+  //pero esto es algo que ocurre implícitamente y no se debe poner
+  //return this
+}
+
+Hero.prototype.saludar = function () {
+  console.log(`New: ${this.name}`);
+};
+
+const goku = new Hero('Goku');
+goku.saludar();
+const vegeta = new Hero('Vegeta');
+vegeta.saludar();</script>
+</body>
+
+</html>
